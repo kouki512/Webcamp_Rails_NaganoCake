@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  
+  namespace :admin do
+    # get 'customers/index'
+    # get 'customers/show'
+    # get 'customers/edit'
+    # get 'customers/update'
+    resources :customers ,only:[:index,:show,:edit,:update]
+  end
     devise_for(
         :admins,
         path: 'admin',
@@ -18,22 +26,20 @@ Rails.application.routes.draw do
     #   # sessions: 'end_users/sessions'
       
     # }
+      get 'customers' => 'customers#show'
+      get 'customers/edit' => 'customers#edit'
+      patch 'customers' => 'customers#update'
+      get 'customers/confirm' => 'customers#confirm'
+      patch 'customers/quit' => 'customers#quit'
+      
       devise_for(
         :end_users,
         path: 'customers',
         module: 'public/end_users'
         )
     
-    # devise_scope :end_users do
-    #   get 'customers/sign_in' => 'end_users/sessions#new'
-    #   get 'customers/sign_up' => 'end_users/registrations#new'
-    # end
     
-    get 'customers' => 'customers#show'
-    get 'customers/edit' => 'customers#edit'
-    patch 'customers' => 'customers#update'
-    get 'customers/confirm' => 'customers#confirm'
-    patch 'customers/quit' => 'customers#quit'
+   
     
     root to: 'homes#top'
   end

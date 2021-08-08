@@ -12,7 +12,12 @@ class ApplicationController < ActionController::Base
     when Admin
       admin_path
     when EndUser
-      customers_path
+      if resource.is_active == true
+        reset_session
+        root_path
+      else
+        customers_path
+      end
     end
   end
   

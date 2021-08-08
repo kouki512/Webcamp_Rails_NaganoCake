@@ -1,0 +1,32 @@
+<h1>会員一覧</h1>
+
+
+<div class="container">
+    <div class="row">
+    <table border="1" style="border-collapse: collapse">
+        <tbody>
+            <% @customers.each do |customer| %>
+            <tr>
+                <th><p>会員id</p></th>
+                <th><p>氏名</p></th>
+                <th><p>メールアドレス</p></th>
+                <th><p>ステータス</p></th>
+            </tr>
+            <tr>
+                <td><%=customer.id %></td>
+                <td><%= customer.last_name %> <%= customer.first_name %></td>
+                <td><%= customer.email %></td>
+                <td>
+                    <% if customer.is_active == false %>
+                        <p>有効</p>
+                    <% else %>
+                        <p>退会済み</p>
+                    <% end %>
+                </td>
+                
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    </div>
+</div>

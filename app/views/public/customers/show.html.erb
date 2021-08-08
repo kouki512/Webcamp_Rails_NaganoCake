@@ -1,2 +1,44 @@
-<h1>Customers#show</h1>
-<p>マイページです。</p>
+<div class="container">
+    <div class="row">
+        
+<h1>マイページ</h1>
+<h3>登録情報　<%= link_to '編集する',customers_edit_path %></h3>
+<table border="1" style="border-collapse: collapse">
+    <tbody>
+        <tr>
+            <td><p>氏名</p></td>
+            <td><%= @user.last_name %> <%= @user.first_name %></td>
+        </tr>
+        <tr>
+            <td><p>カナ</p></td>
+            <td><%= @user.last_name_furigana %>　<%= @user.first_name_furigana %></td>
+        </tr>
+        <tr>
+            <td><p>郵便番号</p></td>
+            <td><%= @user.postal_code %></td>
+        </tr>
+        <tr>
+            <td><p>住所</p></td>
+            <td><%= @user.address %></td>
+        </tr>
+        <tr>
+            <td><p>電話番号</p></td>
+            <td><%= @user.phone_number %></td>
+        </tr>
+        <tr>
+            <td><p>メールアドレス</p></td>
+            <td><%= @user.email %></td>
+        </tr>
+    </tbody>
+</table>
+    <h2>配送先　<%= link_to '一覧を見る' %></h2>
+    <h2>注文履歴　<%= link_to '一覧を見る' %></h2>
+
+    </div>
+</div>
+
+
+
+
+
+
