@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   
   
+  
   namespace :admin do
-    # get 'customers/index'
-    # get 'customers/show'
-    # get 'customers/edit'
-    # get 'customers/update'
     resources :customers ,only:[:index,:show,:edit,:update]
+    resources :items
+    resources :genres ,only:[:index,:create,:edit,:update]
   end
+  
     devise_for(
         :admins,
         path: 'admin',
@@ -38,7 +38,8 @@ Rails.application.routes.draw do
         module: 'public/end_users'
         )
     
-    
+      get 'items' => 'items#index'
+      get 'items/:id' => 'items#show', as: :item
    
     
     root to: 'homes#top'
