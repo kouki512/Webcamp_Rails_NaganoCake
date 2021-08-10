@@ -14,4 +14,7 @@ class EndUser < ApplicationRecord
     validates :phone_number
     validates :email
 end
+
+  has_many :cart_items
+  
 end

@@ -21,3 +21,16 @@ EndUser.create!(
     email: "a@a",
     password: "123456"
     )
+    
+Genre.create!(
+    name: "ケーキ"
+    )    
+    
+Item.create!(
+    genre_id: 1,
+    name:"ケーキ",
+    caption:"テストです",
+    tax_excluded_price:100,
+    is_sales_active:true
+    ) 
+    
