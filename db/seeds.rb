@@ -34,3 +34,9 @@ Item.create!(
     is_sales_active:true
     ) 
     
+Address.create!(
+    end_user_id: 1,
+    address: "大阪府",
+    postal_code: 1111111,
+    name:"大阪太郎"
+    )

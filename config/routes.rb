@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   
+  namespace :public do
+    get 'orders/index'
+    get 'orders/show'
+    get 'orders/new'
+    get 'orders/confirm'
+    get 'orders/decision'
+  end
     devise_for(
         :admins,
         path: 'admin',
@@ -35,7 +42,10 @@ Rails.application.routes.draw do
       resources :cart_items ,only:[:index,:update,:destroy,:create]
       get 'cart_items/destroy_all' => 'cart_items#destroy_all'
       
-      
-    root to: 'homes#top'
+      #orders
+      post 'orders/confirm' => 'orders#confirm'
+      get 'orders/decision' => 'orders#decision'
+      resources :orders ,only:[:index,:show,:create,:new]
+    root to: 'homes#top' 
   end
 end
