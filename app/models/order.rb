@@ -1,10 +1,12 @@
 class Order < ApplicationRecord
     belongs_to :end_user
+    has_many :order_details
     enum payment_method: {
-        "クレジットカード" => 1,
-        "銀行振込" => 2
+        credit_card: 1,
+        bank: 2
     }
-    enum status:{入金待ち:1,入金確認:2,制作中:3,発送準備中:4,発送済み:5}
+    enum status:{status_1: 1,status_2: 2,status_3: 3,status_4: 4,status_5: 5}
+    
     
     
 end

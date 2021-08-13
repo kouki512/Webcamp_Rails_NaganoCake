@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
   
-  namespace :public do
-    get 'orders/index'
-    get 'orders/show'
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/decision'
-  end
+  
     devise_for(
         :admins,
         path: 'admin',
@@ -18,6 +12,12 @@ Rails.application.routes.draw do
     resources :items
     resources :genres ,only:[:index,:create,:edit,:update]
     get '/' => 'homes#top'
+    
+    get "orders" => "orders#index", as: :orders
+    get "orders/:id" => "orders#show", as: :order
+    patch "orders/:id" => "orders#update"
+    # order_details
+    patch "order_details/:id" => "order_details#update",as: :order_detail
   end
   
   

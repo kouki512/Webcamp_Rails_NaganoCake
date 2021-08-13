@@ -33,6 +33,13 @@ Item.create!(
     tax_excluded_price:100,
     is_sales_active:true
     ) 
+Item.create!(
+    genre_id: 1,
+    name:"ケーキ2",
+    caption:"テスト2です",
+    tax_excluded_price:500,
+    is_sales_active:true
+    ) 
     
 Address.create!(
     end_user_id: 1,

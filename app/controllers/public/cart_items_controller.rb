@@ -6,8 +6,6 @@ def index
 end
     
 def create
-    
-    
     cart_item = CartItem.new(cart_item_params)
     cart_item.end_user_id = current_end_user.id
     cart_item_exist = current_end_user.cart_items.find_by(item_id: params[:cart_item][:item_id])
