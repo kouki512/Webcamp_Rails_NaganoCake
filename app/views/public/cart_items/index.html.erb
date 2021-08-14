@@ -1,4 +1,5 @@
 <%= flash[:no_cart] %>
+<% tax = 1.1 %>
 <table>
     <tbody>
         <tr>
@@ -22,7 +23,7 @@
                 <%= cart.item.name %> 
             </td>
             
-            <td><%= cart.item.tax_excluded_price %></td>
+            <td><%= (cart.item.tax_excluded_price * tax).floor %></td>
             <td>
                 <%= form_with model: cart, url: cart_item_path(cart.id), method: :patch,  local:true do |f| %>
                     <%= f.number_field :amount, min:1, placeholder:"個数変更" %>
@@ -30,9 +31,9 @@
                 <% end %>
             </td>
             <td>
-                <%= @sum += cart.item.tax_excluded_price * cart.amount %>
+                <%= @sum += (cart.item.tax_excluded_price * cart.amount * tax).floor %>
+                <% @total += @sum %>
                 <% @sum = 0 %>
-                <% @total += cart.item.tax_excluded_price * cart.amount %>
             </td>
             <td><%= link_to "削除する",cart_item_path(cart.id), method: :delete, data: { confirm: '削除しますか？' }  %> </td>
         </tr>

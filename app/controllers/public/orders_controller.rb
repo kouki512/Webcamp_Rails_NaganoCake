@@ -19,22 +19,28 @@ class Public::OrdersController < ApplicationController
         end_user_id: current_end_user.id,
       )
       @order.billing = session[:sum]
-    @order.save
-    
-    # 注文詳細の保存
-    @cart_item = current_end_user.cart_items
-    @cart_item.each do |cart|
-      @order_detail = OrderDetail.new
-      @order_detail.order_id = @order.id
-      @order_detail.item_id = cart.item_id
-      @order_detail.price = @order.billing
-      @order_detail.amount = cart.amount
-      @order_detail.made_status = 1
-      @order_detail.save
-    end
-    
-    redirect_to orders_decision_path
+    if @order.end_user.cart_items.count >= 1
+        @order.save
+      
+      # 注文詳細の保存
+      @cart_item = current_end_user.cart_items
+      @cart_item.each do |cart|
+        @order_detail = OrderDetail.new
+        @order_detail.order_id = @order.id
+        @order_detail.item_id = cart.item_id
+        @order_detail.price = @order.billing
+        @order_detail.amount = cart.amount
+        @order_detail.made_status = 1
+        @order_detail.save
+      end
+        
+        redirect_to orders_decision_path
+    else
+      redirect_back(fallback_location: root_path)
+    end     
   end
+    
+  
 
   def new
     @order = Order.new
@@ -71,16 +77,17 @@ class Public::OrdersController < ApplicationController
     )
     @sum = 0
     @total = 0
-    
+    tax = 1.1
     
     @cart_item.each do |cart|
-      @total += cart.item.tax_excluded_price * cart.amount
+      @total += (cart.item.tax_excluded_price * cart.amount * tax).floor
       session[:sum] = @total + @order.shipping
     end
     
   end
 
   def decision
+    current_end_user.cart_items.destroy_all
   end
   
   private

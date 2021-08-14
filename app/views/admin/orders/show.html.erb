@@ -1,3 +1,4 @@
+
 <h1>注文履歴詳細</h1>
 <table>
     <tbody>
@@ -33,7 +34,7 @@
         <tbody>
             <tr>
                 <th>商品名</th>
-                <th>単価(税込)<th>
+                <th>単価(税込)</th>
                 <th>数量</th>
                 <th>小計</th>
                 <th>製作ステータス</th>
@@ -42,9 +43,9 @@
                 <tr>
                      
                     <td><%= order_detail.item.name %></td>
-                    <td> <%= order_detail.item.tax_excluded_price %></td>
+                    <td> <%= (order_detail.item.tax_excluded_price * @tax).floor %></td>
                     <td> <%= order_detail.amount %></td>
-                    <td> <%= order_detail.item.tax_excluded_price * order_detail.amount %></td>
+                    <td> <%= (order_detail.item.tax_excluded_price * order_detail.amount * @tax).floor %></td>
                     <td>
                     <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local:true do |f| %>
                         <%= f.select :made_status,OrderDetail.made_statuses_i18n.keys.map{|k|[I18n.t("enums.order_detail.made_status.#{k}"),k]}%>

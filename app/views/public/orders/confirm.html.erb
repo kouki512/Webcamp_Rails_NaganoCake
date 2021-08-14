@@ -1,4 +1,5 @@
 <h1>注文情報確認</h1>
+<% tax = 1.1 %>
 <table  border="1" style="border-collapse: collapse">
  <tbody>
      <tr>
@@ -9,12 +10,14 @@
      </tr>
      <% @cart_item.each do |cart| %>
      <tr>
-        <td><%= attachment_image_tag cart.item, :image , :fill, 100, 100, fallback:"no_image.jpg" %></td>
-        <td><%= cart.item.name %></td> 
-        <td><%= cart.item.tax_excluded_price %></td>
+        <td>
+         <%= attachment_image_tag cart.item, :image , :fill, 100, 100, fallback:"no_image.jpg" %>
+        <%= cart.item.name %>
+        </td>
+        <td><%= (cart.item.tax_excluded_price * tax).floor %></td>
         <td><%= cart.amount %></td>
         <td>
-         <%= @sum += cart.item.tax_excluded_price * cart.amount %>
+         <%= @sum += (cart.item.tax_excluded_price * cart.amount * tax).floor %>
          <% @sum = 0 %>
         </td>
      </tr>
@@ -31,7 +34,7 @@
   
   <tr>
    <th>商品合計</th>
-   <td><%= @total %></td>
+   <td><%= @total.floor %></td>
   </tr>
   
   <tr>
@@ -55,5 +58,5 @@
   <%= f.hidden_field :postal_code %>
   <%= f.hidden_field :address %>
   <%= f.hidden_field :name %>
-<%= f.submit "購入を確定する" %>
+<%= f.submit "購入を確定する", data:{confirm: "購入を確定してもよろしいでしょうか？"} %>
 <% end %>

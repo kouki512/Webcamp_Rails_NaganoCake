@@ -8,10 +8,11 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @sum = 0
     @total = 0
+    @tax = 1.1
     @order_detail = @order.order_details.all
     # 合計金額と請求金額の計算
     @order.order_details.each do |order_detail|
-      @sum += order_detail.item.tax_excluded_price * order_detail.amount
+      @sum += (order_detail.item.tax_excluded_price * order_detail.amount * @tax).floor
     end
     @total += @sum + @order.shipping
     #/合計金額と請求金額の計算
