@@ -1,6 +1,6 @@
 class Admin::ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = Item.search(params[:search])
   end
 
   def new
@@ -21,7 +21,7 @@ class Admin::ItemsController < ApplicationController
   
   private
   def items_params
-    params.require(:item).permit(:name,:caption,:image,:tax_excluded_price,:genre_id,:is_sales_active)
+    params.require(:item).permit(:name,:caption,:image,:tax_excluded_price,:genre_id,:is_sales_active,:search)
   end
   
 end

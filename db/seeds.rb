@@ -40,6 +40,13 @@ Item.create!(
     tax_excluded_price:500,
     is_sales_active:true
     ) 
+Item.create!(
+    genre_id: 1,
+    name:"クッキー",
+    caption:"クッキーです",
+    tax_excluded_price:300,
+    is_sales_active:true
+    ) 
     
 Address.create!(
     end_user_id: 1,

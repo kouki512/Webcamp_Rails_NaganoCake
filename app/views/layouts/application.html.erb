@@ -30,6 +30,12 @@
           <li><%=link_to '注文履歴一覧', admin_orders_path %></li>
           <li><%=link_to 'ジャンル一覧', admin_genres_path %></li>
           <li><%=link_to 'ログアウト',destroy_admin_session_path, method: :delete %></li>
+          <li>
+            <%= form_tag(admin_items_path,:method => "get") do %>
+              <%= text_field_tag :search %>
+              <%= submit_tag "Search", :name => nil %>
+            <% end %>
+          </li>
         </ul>
         <% else %>
         <ul>
