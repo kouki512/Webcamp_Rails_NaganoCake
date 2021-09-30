@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
   
+  namespace :public do
+    get 'addresses/index'
+    get 'addresses/edit'
+  end
     devise_for(
         :admins,
         path: 'admin',
@@ -22,7 +26,9 @@ Rails.application.routes.draw do
   
   
   scope module: :public do
-    
+      # addresses
+      resources :addresses
+      # customers
       get 'customers' => 'customers#show'
       get 'customers/edit' => 'customers#edit'
       patch 'customers' => 'customers#update'

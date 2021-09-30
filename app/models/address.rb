@@ -3,4 +3,7 @@ class Address < ApplicationRecord
     def select_address
         "〒" + postal_code + " " + address + " " + name
     end
+
+    
+
 end

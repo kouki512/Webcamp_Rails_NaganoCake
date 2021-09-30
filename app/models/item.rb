@@ -11,4 +11,11 @@ class Item < ApplicationRecord
             all
         end
     end
+    # def self.genre_search(search)
+    #     if search
+    #         where(genre_id: params[:genre_id])
+    #     else 
+    #         all
+    #     end
+    # end
 end

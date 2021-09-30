@@ -1,6 +1,8 @@
 class Public::OrdersController < ApplicationController
-  before_action :no_cart_method
+  before_action :no_cart_method, except: [:index, :show]
   def index
+    #@orders = Order.where(end_user_id: current_end_user.id)
+    @orders = current_end_user.orders
   end
 
   def show

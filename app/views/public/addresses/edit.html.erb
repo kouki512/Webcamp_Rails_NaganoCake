@@ -1,0 +1,15 @@
+<%= form_with model:@address, method: :patch, local:true do |f| %>
+<div>
+  <%= f.label :postal_code,"郵便番号" %>
+  <%= f.text_field :postal_code %>
+</div>
+<div>
+  <%= f.label :address,"住所" %>
+  <%= f.text_field :address %>
+</div>
+<div>
+  <%= f.label :name,"名前" %>
+  <%= f.text_field :name %>
+</div>
+  <%= f.submit "変更内容を保存" %>
+<% end %>
